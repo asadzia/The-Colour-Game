@@ -1,0 +1,78 @@
+<html>
+<body>
+
+<script>
+	var target_index;
+	var colors = [];
+	var target;
+	var count = 0;
+
+	function do_game() {
+
+		colors.push("aqua");
+		colors.push("blue");
+		colors.push("coral");
+		colors.push("darkGreen");
+		colors.push("magenta");
+		colors.push("orchid");
+		colors.push("sienna");
+
+		var finished = false;
+		target_index = parseInt((Math.random() * (6 - 0 + 1)), 10) + 0;
+		target = colors[target_index];
+
+		while (finished == false) {
+			count++;
+		    var answer = prompt("I am thinking of one of these colors:\n\nAqua, Blue, Coral, DarkGreen, Magenta, Orchid, Sienna\n\nWhat color am I thinking of?");
+		    
+		    finished = check_guess(answer, count);
+		}
+	}
+
+	function check_guess(myanswer, mycount) {
+		var i;
+		var flag = 0;
+
+		for (i = 0; i < 7; i++)
+		{
+			if (myanswer == colors[i])
+			{
+				flag = 1;
+				break;
+			}
+		}
+
+		if (flag == 0)
+		{
+			window.alert("Sorry, I don't recognize your color.\n\nPlease try again.");
+			return false;
+		}
+
+		else if (myanswer > target)
+		{
+			window.alert("Sorry, your guess is not correct!\n\nHint: Your color is alphabetically higher than mine.\n\nPlease try again.");
+			return false;
+		}
+
+		else if (myanswer < target)
+		{
+			window.alert("Sorry, your guess is not correct!\n\nHint: Your color is alphabetically lower than mine.\n\nPlease try again.");
+			return false;
+		}
+
+		else if (myanswer == target) {
+		    	myBody=document.getElementsByTagName("body")[0];
+				myBody.style.background=target;
+				window.alert("Congratulations! You have guessed the color!\n\nIt took you " + mycount.toString() + " guesses to finish the game!\n\nYou can see the color in the background.");
+		        return true;	
+		    }
+	}
+
+
+window.onload = do_game;
+
+</script>
+
+</body>
+</html>
+
